@@ -121,7 +121,7 @@ impl<'a> Lexer<'a> {
 }
 
 fn isKeyword(word: &String) -> bool {
-    let keywords = ["if", "cond", "define", "lambda"];
+    let keywords = ["if", "cond", "define", "lambda", "else"];
     keywords.contains(&word.as_str())
 }
 
