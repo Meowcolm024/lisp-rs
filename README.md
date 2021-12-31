@@ -1,0 +1,3 @@
+# lisp-rs
+
+Learning rust
