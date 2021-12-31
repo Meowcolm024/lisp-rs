@@ -27,7 +27,7 @@ impl<'a> Lexer<'a> {
     pub fn run(mut self) -> Result<Vec<Token>, String> {
         while let Some(tk) = self.current {
             let token = match tk {
-                '"' => self.string(),
+                '\"' => self.string(),
                 k if isDelim(k) => self.delim(k),
                 ';' => self.comment(),
                 x if x.is_ascii_digit() => self.number(x),
@@ -55,14 +55,15 @@ impl<'a> Lexer<'a> {
     fn string(&mut self) -> Token {
         let mut acc: Vec<char> = Vec::new();
         while let Some(i) = self.next() {
-            if i == '"' {
+            if i == '\"' {
+                self.next();
                 return Token::String(acc.into_iter().collect());
             } else {
                 acc.push(i);
             }
         }
         let t: String = acc.into_iter().collect();
-        Token::Error("\"".to_string() + &t)
+        Token::Error("Fail to parse string \"".to_string() + &t)
     }
 
     fn number(&mut self, it: char) -> Token {
